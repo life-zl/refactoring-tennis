@@ -1,6 +1,7 @@
 package cn.xpbootcamp.tennis.game1;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum ScoreEnum {
     SCORE_ZERO(0,"Love", "Love-All"),
@@ -27,15 +28,17 @@ public enum ScoreEnum {
     }
 
     public static String getNameByScore(int score) {
-        ScoreEnum[] values = ScoreEnum.values();
-        return Arrays.stream(values).filter(x -> score == x.score).findFirst().map(ScoreEnum::getName).orElse("");
+        return getMatchScoreEnum(score).map(ScoreEnum::getName).orElse("");
     }
 
     public static String getTieNameByScore(int score) {
-        ScoreEnum[] values = ScoreEnum.values();
-        return Arrays.stream(values).filter(x -> score == x.score).findFirst().map(ScoreEnum::getTieName).orElse("Deuce");
+        return getMatchScoreEnum(score).map(ScoreEnum::getTieName).orElse("Deuce");
     }
 
+    private static Optional<ScoreEnum> getMatchScoreEnum(int score) {
+        ScoreEnum[] values = ScoreEnum.values();
+        return Arrays.stream(values).filter(x -> score == x.score).findFirst();
+    }
 
 
 }
