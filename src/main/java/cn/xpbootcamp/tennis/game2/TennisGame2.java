@@ -31,7 +31,7 @@ public class TennisGame2 implements TennisGame {
         if (isScoreAll(p2Point, p1Point)) {
             score = format(SCORE_S_ALL, getScoreNameByNum(p2Point));
         }
-        if (isCommonScore()) {
+        if (isCommonScore(p1Point, p2Point)) {
             p1Result = getScoreNameByNum(p1Point);
             p2Result = getScoreNameByNum(p2Point);
             score = format(SCORE_S_S, p1Result, p2Result);
@@ -54,7 +54,7 @@ public class TennisGame2 implements TennisGame {
         return score;
     }
 
-    private boolean isCommonScore() {
+    private boolean isCommonScore(int p1Point, int p2Point) {
         return p1Point > p2Point || p2Point > p1Point && p2Point < 4;
     }
 
@@ -73,13 +73,13 @@ public class TennisGame2 implements TennisGame {
     private String getScoreNameByNum(int point) {
         switch (point) {
             case 0:
-                return LOVE;
+                return SCORE_LOVE;
             case 1:
-                return "Fifteen";
+                return SCORE_FIFTEEN;
             case 2:
-                return "Thirty";
+                return SCORE_THIRTY;
             case 3:
-                return "Forty";
+                return SCORE_FORTY;
         }
         return "";
     }
