@@ -25,40 +25,49 @@ public class TennisGame2 implements TennisGame {
         if (p1Point == p2Point && p1Point >= 3)
             score = "Deuce";
 
-        if (p1Point > 0 && p2Point == 0) {
+        if (isScoreAll(p1Point, p2Point)) {
             score = format(SCORE_S_ALL, getScoreNameByNum(p1Point));
         }
-        if (p2Point > 0 && p1Point == 0) {
+        if (isScoreAll(p2Point, p1Point)) {
             score = format(SCORE_S_ALL, getScoreNameByNum(p2Point));
         }
-
-        if (p1Point > p2Point && p1Point < 4) {
+        if (isCommonScore()) {
             p1Result = getScoreNameByNum(p1Point);
             p2Result = getScoreNameByNum(p2Point);
             score = format(SCORE_S_S, p1Result, p2Result);
         }
-        if (p2Point > p1Point && p2Point < 4) {
 
-            p2Result = getScoreNameByNum(p2Point);
-            p1Result = getScoreNameByNum(p1Point);
-            score = format(SCORE_S_S, p1Result, p2Result);
-        }
-
-        if (p1Point > p2Point && p2Point >= 3) {
+        if (isAdvantage(p1Point, p2Point)) {
             score = "Advantage player1";
         }
 
-        if (p2Point > p1Point && p1Point >= 3) {
+        if (isAdvantage(p2Point, p1Point)) {
             score = "Advantage player2";
         }
 
-        if (p1Point >= 4 && p2Point >= 0 && (p1Point - p2Point) >= 2) {
+        if (isPlayerWin(p1Point, p2Point)) {
             score = "Win for player1";
         }
-        if (p2Point >= 4 && p1Point >= 0 && (p2Point - p1Point) >= 2) {
+        if (isPlayerWin(p2Point, p1Point)) {
             score = "Win for player2";
         }
         return score;
+    }
+
+    private boolean isCommonScore() {
+        return p1Point > p2Point || p2Point > p1Point && p2Point < 4;
+    }
+
+    private boolean isPlayerWin(int p1Point, int p2Point) {
+        return p1Point >= 4 && p2Point >= 0 && (p1Point - p2Point) >= 2;
+    }
+
+    private boolean isScoreAll(int p1Point, int p2Point) {
+        return p1Point > 0 && p2Point == 0;
+    }
+
+    private boolean isAdvantage(int p1Point, int p2Point) {
+        return p1Point > p2Point && p2Point >= 3;
     }
 
     private String getScoreNameByNum(int point) {
