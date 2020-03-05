@@ -2,7 +2,7 @@ package cn.xpbootcamp.tennis.game2;
 
 import cn.xpbootcamp.tennis.TennisGame;
 
-import static cn.xpbootcamp.tennis.PlayerConstants.PLAYER_2_NAME;
+import static cn.xpbootcamp.tennis.PlayerConstants.PLAYER_1_NAME;
 
 public class TennisGame2 implements TennisGame {
     public int p1Point = 0;
@@ -96,7 +96,7 @@ public class TennisGame2 implements TennisGame {
     }
 
     public void wonPoint(String player) {
-        if (player.equals(PLAYER_2_NAME))
+        if (player.equals(PLAYER_1_NAME))
             p1Point++;
         else
             p2Point++;
