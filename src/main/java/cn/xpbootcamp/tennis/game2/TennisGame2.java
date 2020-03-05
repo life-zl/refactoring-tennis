@@ -3,6 +3,7 @@ package cn.xpbootcamp.tennis.game2;
 import cn.xpbootcamp.tennis.TennisGame;
 
 import static cn.xpbootcamp.tennis.PlayerConstants.PLAYER_1_NAME;
+import static cn.xpbootcamp.tennis.game2.ScoreConstants.SCORE_S_S;
 import static java.lang.String.*;
 
 public class TennisGame2 implements TennisGame {
@@ -26,24 +27,24 @@ public class TennisGame2 implements TennisGame {
         if (p1Point > 0 && p2Point == 0) {
             p1Result = getScoreNameByNum(p1Point);
             p2Result = "Love";
-            score = format("%s-%s", p1Result, p2Result);
+            score = format(SCORE_S_S, p1Result, p2Result);
         }
         if (p2Point > 0 && p1Point == 0) {
             p2Result = getScoreNameByNum(p2Point);
             p1Result = "Love";
-            score = format("%s-%s", p1Result, p2Result);
+            score = format(SCORE_S_S, p1Result, p2Result);
         }
 
         if (p1Point > p2Point && p1Point < 4) {
             p1Result = getScoreNameByNum(p1Point);
             p2Result = getScoreNameByNum(p2Point);
-            score = format("%s-%s", p1Result, p2Result);
+            score = format(SCORE_S_S, p1Result, p2Result);
         }
         if (p2Point > p1Point && p2Point < 4) {
 
             p2Result = getScoreNameByNum(p2Point);
             p1Result = getScoreNameByNum(p1Point);
-            score = format("%s-%s", p1Result, p2Result);
+            score = format(SCORE_S_S, p1Result, p2Result);
         }
 
         if (p1Point > p2Point && p2Point >= 3) {
