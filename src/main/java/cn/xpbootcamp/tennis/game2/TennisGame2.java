@@ -3,6 +3,7 @@ package cn.xpbootcamp.tennis.game2;
 import cn.xpbootcamp.tennis.TennisGame;
 
 import static cn.xpbootcamp.tennis.PlayerConstants.PLAYER_1_NAME;
+import static cn.xpbootcamp.tennis.game2.ScoreConstants.*;
 import static cn.xpbootcamp.tennis.game2.ScoreConstants.SCORE_S_S;
 import static java.lang.String.*;
 
@@ -19,20 +20,16 @@ public class TennisGame2 implements TennisGame {
     public String getScore() {
         String score = "";
         if (p1Point == p2Point && p1Point < 4) {
-            score = format("%s-All", getScoreNameByNum(p1Point));
+            score = format(SCORE_S_ALL, getScoreNameByNum(p1Point));
         }
         if (p1Point == p2Point && p1Point >= 3)
             score = "Deuce";
 
         if (p1Point > 0 && p2Point == 0) {
-            p1Result = getScoreNameByNum(p1Point);
-            p2Result = "Love";
-            score = format(SCORE_S_S, p1Result, p2Result);
+            score = format(SCORE_S_ALL, getScoreNameByNum(p1Point));
         }
         if (p2Point > 0 && p1Point == 0) {
-            p2Result = getScoreNameByNum(p2Point);
-            p1Result = "Love";
-            score = format(SCORE_S_S, p1Result, p2Result);
+            score = format(SCORE_S_ALL, getScoreNameByNum(p2Point));
         }
 
         if (p1Point > p2Point && p1Point < 4) {
@@ -67,7 +64,7 @@ public class TennisGame2 implements TennisGame {
     private String getScoreNameByNum(int point) {
         switch (point) {
             case 0:
-                return "Love";
+                return LOVE;
             case 1:
                 return "Fifteen";
             case 2:
