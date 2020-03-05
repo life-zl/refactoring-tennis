@@ -2,6 +2,8 @@ package cn.xpbootcamp.tennis.game1;
 
 import cn.xpbootcamp.tennis.TennisGame;
 
+import static cn.xpbootcamp.tennis.PlayerConstants.PLAYER_1_NAME;
+
 public class TennisGame1 implements TennisGame {
 
     private int mScore1 = 0;
@@ -11,7 +13,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if (playerName.equals("player1"))
+        if (playerName.equals(PLAYER_1_NAME))
             mScore1 += 1;
         else
             mScore2 += 1;

@@ -11,9 +11,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static cn.xpbootcamp.tennis.PlayerConstants.PLAYER_1_NAME;
+import static cn.xpbootcamp.tennis.PlayerConstants.PLAYER_2_NAME;
 import static org.junit.Assert.assertEquals;
 
 class TennisGameTest {
+
     private int player1Score;
     private int player2Score;
     private String expectedScore;
@@ -70,14 +73,14 @@ class TennisGameTest {
     @ParameterizedTest
     @MethodSource("getAllScores")
     public void checkAllScoresTennisGame2(List<Object> params) {
-        TennisGame2 game = new TennisGame2("player1", "player2");
+        TennisGame2 game = new TennisGame2();
         checkAllScores(params, game);
     }
 
     @ParameterizedTest
     @MethodSource("getAllScores")
     public void checkAllScoresTennisGame3(List<Object> params) {
-        TennisGame3 game = new TennisGame3("player1", "player2");
+        TennisGame3 game = new TennisGame3(PLAYER_1_NAME, PLAYER_2_NAME);
         checkAllScores(params, game);
     }
 
@@ -89,9 +92,9 @@ class TennisGameTest {
         int highestScore = Math.max(this.player1Score, this.player2Score);
         for (int i = 0; i < highestScore; i++) {
             if (i < this.player1Score)
-                game.wonPoint("player1");
+                game.wonPoint(PLAYER_1_NAME);
             if (i < this.player2Score)
-                game.wonPoint("player2");
+                game.wonPoint(PLAYER_2_NAME);
         }
         assertEquals(this.expectedScore, game.getScore());
     }

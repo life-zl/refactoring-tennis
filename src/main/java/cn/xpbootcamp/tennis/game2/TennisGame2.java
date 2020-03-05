@@ -2,18 +2,16 @@ package cn.xpbootcamp.tennis.game2;
 
 import cn.xpbootcamp.tennis.TennisGame;
 
+import static cn.xpbootcamp.tennis.PlayerConstants.PLAYER_2_NAME;
+
 public class TennisGame2 implements TennisGame {
     public int p1Point = 0;
     public int p2Point = 0;
 
-    public String p1Res = "";
-    public String p2Res = "";
-    private String player1Name;
-    private String player2Name;
+    public String p1Result = "";
+    public String p2Result = "";
 
-    public TennisGame2(String player1Name, String player2Name) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
+    public TennisGame2() {
     }
 
     public String getScore() {
@@ -31,49 +29,53 @@ public class TennisGame2 implements TennisGame {
             score = "Deuce";
 
         if (p1Point > 0 && p2Point == 0) {
+            String score1;
             if (p1Point == 1)
-                p1Res = "Fifteen";
+                p1Result = "Fifteen";
             if (p1Point == 2)
-                p1Res = "Thirty";
+                p1Result = "Thirty";
             if (p1Point == 3)
-                p1Res = "Forty";
+                p1Result = "Forty";
 
-            p2Res = "Love";
-            score = p1Res + "-" + p2Res;
+            p2Result = "Love";
+            score1 = p1Result + "-" + p2Result;
+            score = score1;
         }
         if (p2Point > 0 && p1Point == 0) {
+            String score1;
             if (p2Point == 1)
-                p2Res = "Fifteen";
+                p2Result = "Fifteen";
             if (p2Point == 2)
-                p2Res = "Thirty";
+                p2Result = "Thirty";
             if (p2Point == 3)
-                p2Res = "Forty";
+                p2Result = "Forty";
 
-            p1Res = "Love";
-            score = p1Res + "-" + p2Res;
+            p1Result = "Love";
+            score1 = p1Result + "-" + p2Result;
+            score = score1;
         }
 
         if (p1Point > p2Point && p1Point < 4) {
             if (p1Point == 2)
-                p1Res = "Thirty";
+                p1Result = "Thirty";
             if (p1Point == 3)
-                p1Res = "Forty";
+                p1Result = "Forty";
             if (p2Point == 1)
-                p2Res = "Fifteen";
+                p2Result = "Fifteen";
             if (p2Point == 2)
-                p2Res = "Thirty";
-            score = p1Res + "-" + p2Res;
+                p2Result = "Thirty";
+            score = p1Result + "-" + p2Result;
         }
         if (p2Point > p1Point && p2Point < 4) {
             if (p2Point == 2)
-                p2Res = "Thirty";
+                p2Result = "Thirty";
             if (p2Point == 3)
-                p2Res = "Forty";
+                p2Result = "Forty";
             if (p1Point == 1)
-                p1Res = "Fifteen";
+                p1Result = "Fifteen";
             if (p1Point == 2)
-                p1Res = "Thirty";
-            score = p1Res + "-" + p2Res;
+                p1Result = "Thirty";
+            score = p1Result + "-" + p2Result;
         }
 
         if (p1Point > p2Point && p2Point >= 3) {
@@ -93,18 +95,10 @@ public class TennisGame2 implements TennisGame {
         return score;
     }
 
-    public void P1Score() {
-        p1Point++;
-    }
-
-    public void P2Score() {
-        p2Point++;
-    }
-
     public void wonPoint(String player) {
-        if (player.equals("player1"))
-            P1Score();
+        if (player.equals(PLAYER_2_NAME))
+            p1Point++;
         else
-            P2Score();
+            p2Point++;
     }
 }
