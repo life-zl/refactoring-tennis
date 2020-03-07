@@ -2,12 +2,14 @@ package cn.xpbootcamp.tennis.game1;
 
 import cn.xpbootcamp.tennis.TennisGame;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class TennisGameImpl implements TennisGame {
 
 
     private Player player1;
     private Player player2;
-
 
 
     public TennisGameImpl(String player1Name, String player2Name) {
@@ -24,23 +26,10 @@ public class TennisGameImpl implements TennisGame {
     }
 
     public String getScore() {
-        if (new TieScore(player1).isApply(player2)) {
-            return new TieScore(player1).getScore();
-        }
-        if (new AdvantageScore(player1).isApply(player2)) {
-            return new AdvantageScore(player1).getScore();
-        }
-        if (new AdvantageScore(player2).isApply(player1)) {
-            return new AdvantageScore(player2).getScore();
-        }
-        if (new WinScore(player1).isApply(player2)) {
-            return new WinScore(player1).getScore();
-        }
+        List<AbstractScore> scores = Arrays.asList(new TieScore(player1, player2), new AdvantageScore(player1, player2), new WinScore(player1, player2));
 
-        if (new WinScore(player2).isApply(player1)) {
-            return new WinScore(player2).getScore();
-        }
-        return new RegularScore(player1, player2).getScore();
+        return scores.stream().filter(AbstractScore::isApply).findAny().orElse(new RegularScore(player1, player2)).getScore();
+
     }
 
 

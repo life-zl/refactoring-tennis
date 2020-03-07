@@ -2,14 +2,16 @@ package cn.xpbootcamp.tennis.game1;
 
 import java.util.Arrays;
 
-public class RegularScore{
+public class RegularScore extends AbstractScore {
 
-    private Player player1;
-    private Player player2;
 
     public RegularScore(Player player1, Player player2) {
-        this.player1 = player1;
-        this.player2 = player2;
+        super(player1, player2);
+    }
+
+    @Override
+    public boolean isApply() {
+        return false;
     }
 
     public String getScore() {
