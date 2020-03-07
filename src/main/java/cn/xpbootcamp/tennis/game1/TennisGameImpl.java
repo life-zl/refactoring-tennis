@@ -3,7 +3,7 @@ package cn.xpbootcamp.tennis.game1;
 import cn.xpbootcamp.tennis.TennisGame;
 
 public class TennisGameImpl implements TennisGame {
-    public static final String[] SCORES = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
+
 
     private Player player1;
     private Player player2;
@@ -24,34 +24,24 @@ public class TennisGameImpl implements TennisGame {
     }
 
     public String getScore() {
-        if (player1.isTieScore(player2)) {
-            return getTieScore(player1.getScore());
+        if (new TieScore(player1).isApply(player2)) {
+            return new TieScore(player1).getScore();
+        }
+        if (new AdvantageScore(player1).isApply(player2)) {
+            return new AdvantageScore(player1).getScore();
+        }
+        if (new AdvantageScore(player2).isApply(player1)) {
+            return new AdvantageScore(player2).getScore();
+        }
+        if (new WinScore(player1).isApply(player2)) {
+            return new WinScore(player1).getScore();
         }
 
-        if (player1.isPlayerAdvantage(player2)) {
-            return "Advantage player1";
+        if (new WinScore(player2).isApply(player1)) {
+            return new WinScore(player2).getScore();
         }
-        if (player2.isPlayerAdvantage(player1)) {
-            return "Advantage player2";
-        }
-        if (player1.isPlayerWin(player2)) {
-            return "Win for player1";
-        }
-
-        if (player2.isPlayerWin(player1)) {
-            return "Win for player2";
-        }
-        return getRegularScore(player1.getScore(), player2.getScore());
+        return new RegularScore(player1, player2).getScore();
     }
 
 
-
-    private String getRegularScore(int player1Score, int player2Score) {
-        return SCORES[player1Score] + "-" + SCORES[player2Score];
-    }
-
-    private String getTieScore(int player1Score) {
-
-        return player1Score >= 3 ? "Deuce" : SCORES[player1Score] + "-All";
-    }
 }
