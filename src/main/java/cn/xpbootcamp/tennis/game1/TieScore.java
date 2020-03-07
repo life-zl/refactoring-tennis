@@ -8,7 +8,7 @@ public class TieScore extends AbstractScore {
 
     @Override
     public boolean isApply() {
-        return this.player1.getScore() == player2.getScore();
+        return player1.isTieScore(player2);
     }
 
     @Override
