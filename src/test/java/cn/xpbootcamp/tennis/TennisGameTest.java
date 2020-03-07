@@ -1,7 +1,7 @@
 package cn.xpbootcamp.tennis;
 
 
-import cn.xpbootcamp.tennis.game1.TennisGame1;
+import cn.xpbootcamp.tennis.game1.TennisGameImpl;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -77,7 +77,7 @@ class TennisGameTest {
     @ParameterizedTest
     @MethodSource("getAllScores")
     public void checkAllScoresTennisGame1(ScoreItem scoreItem) {
-        TennisGame1 game = new TennisGame1(PLAYER_1_NAME, PLAYER_2_NAME);
+        TennisGameImpl game = new TennisGameImpl(PLAYER_1_NAME, PLAYER_2_NAME);
         int highestScore = Math.max(scoreItem.player1score, scoreItem.player2Score);
         for (int i = 0; i < highestScore; i++) {
             if (i < scoreItem.player1score)
