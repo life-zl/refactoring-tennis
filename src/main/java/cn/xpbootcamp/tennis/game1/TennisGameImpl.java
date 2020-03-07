@@ -27,24 +27,36 @@ public class TennisGameImpl implements TennisGame {
             return getTieScore(player1Score);
         }
 
-        if (isScoreGreaterThan4Score(player1Score, player2Score)) {
-            return isWinOrAdvantage(player1Score, player2Score);
+        if (isPlayer1Advantage(player1Score, player2Score)) {
+            return "Advantage player1";
+        }
+        if (isPlayer2Advantage(player1Score, player2Score)) {
+            return "Advantage player2";
+        }
+        if (isPlayer1Win(player1Score, player2Score)) {
+            return "Win for player1";
+        }
+
+        if (isPlayer2Win(player1Score, player2Score, player2Score, player1Score)) {
+            return "Win for player2";
         }
         return getRegularScore(player1Score, player2Score);
     }
 
-    private String isWinOrAdvantage(int player1Score, int player2Score) {
-        int minusResult = player1Score - player2Score;
-        if (minusResult == 1) {
-            return "Advantage player1";
-        }
-        if (minusResult == -1) {
-            return "Advantage player2";
-        }
-        if (minusResult >= 2) {
-            return "Win for player1";
-        }
-        return "Win for player2";
+    private boolean isPlayer2Win(int player1Score, int player2Score, int player2Score2, int player1Score2) {
+        return isScoreGreaterThan4Score(player1Score, player2Score) && player2Score2 - player1Score2 >= 2;
+    }
+
+    private boolean isPlayer1Win(int player1Score, int player2Score) {
+        return isScoreGreaterThan4Score(player1Score, player2Score) && player1Score - player2Score >= 2;
+    }
+
+    private boolean isPlayer2Advantage(int player1Score, int player2Score) {
+        return isScoreGreaterThan4Score(player1Score, player2Score) && player1Score - player2Score == -1;
+    }
+
+    private boolean isPlayer1Advantage(int player1Score, int player2Score) {
+        return isScoreGreaterThan4Score(player1Score, player2Score) && player1Score - player2Score == 1;
     }
 
     private boolean isScoreGreaterThan4Score(int player1Score, int player2Score) {
