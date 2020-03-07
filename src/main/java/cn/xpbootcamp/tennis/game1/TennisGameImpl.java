@@ -2,6 +2,9 @@ package cn.xpbootcamp.tennis.game1;
 
 import cn.xpbootcamp.tennis.TennisGame;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 public class TennisGameImpl implements TennisGame {
 
     private Player player1;
@@ -21,31 +24,10 @@ public class TennisGameImpl implements TennisGame {
     }
 
     public String getScore() {
-        String[] scores = {"Love", "Fifteen", "Thirty", "Forty"};
-        if (player1.isTieScore(player2)) {
-            return getTieScore(scores);
-        }
-        if (player1.isAdvantage(player2)) {
-            return "Advantage player1";
-        }
-        if (player2.isAdvantage(player1)) {
-            return "Advantage player2";
-        }
-        if (player1.isWin(player2)) {
-            return "Win for player1";
-        }
-        if (player2.isWin(player1)) {
-            return "Win for player2";
-        }
-        return getCommonScore(scores);
-    }
 
-    private String getTieScore(String[] scores) {
-        return player1.getScore() > 2 ? "Deuce" : scores[player1.getScore()] + "-All";
-    }
-
-    private String getCommonScore(String[] scores) {
-        return scores[player1.getScore()] + "-" + scores[player2.getScore()];
+        return Stream.of(new TieScore(player1, player2), new AdvantageScore(player1, player2), new WinScore(player1, player2))
+                .filter(AbstractScore::isApply).findAny().orElse(new CommonScore(player1, player2))
+                .getScore();
     }
 
 }
